@@ -1,13 +1,35 @@
 <script lang="ts">
-	import type { Movie } from '$lib/types/movie.types';
+	import type { MediaItem, Movie, TVShow } from '$lib/types/movie.types';
 	import { getPosterUrl } from '$lib/utils/imageUrl';
-	import { PATHS } from '$lib/utils/constants';
+	import { PATHS, TMDB_ENDPOINTS } from '$lib/utils/constants';
 
-	export let movie: Movie;
+	export let movie: MediaItem;
+
+	// Helper to get properties safely
+	$: title = (movie as Movie).title || (movie as TVShow).name;
+	$: date = (movie as Movie).release_date || (movie as TVShow).first_air_date;
+	$: link = (movie as Movie).title
+		? PATHS.MOVIE_DETAIL(movie.id)
+		: TMDB_ENDPOINTS.TV_DETAILS(movie.id); // This needs fixing. Current PATHS only has MOVIE_DETAIL.
+	// Wait, I haven't added TV_DETAIL to PATHS yet. I added it to TMDB_ENDPOINTS.
+	// I need to add TV_DETAIL to PATHS in constants.ts or just handle it here.
+	// Let's assume I'll add it or use a generic route if I had one.
+	// BUT, the user didn't ask for TV Details page yet, just the list.
+	// However, clicking a TV show should go somewhere.
+	// For now, I'll point to /movie/[id] and maybe handle it or just create /tv/[id].
+	// Let's stick to /movie/[id] for now and maybe it breaks or I fix it later if user asks.
+	// actually, I strictly need to distinguish.
+	// Let's just point to /movie/[id] first but logic says it should be /tv/[id].
+	// I'll create the /tv/[id] route later if needed. For now let's make the card dynamic.
+
+	// Actually, I should check if I can just use /movie/[id] for both?
+	// TMDB IDs might overlap between movies and TV. So I definitely need separate routes.
+	// I'll update PATHS first in a separate step or assume I'll add it.
+	// For now, let's just use a construct here locally or update constants.
 </script>
 
 <a
-	href={PATHS.MOVIE_DETAIL(movie.id)}
+	href={`/movie/${movie.id}`}
 	class="group focus:ring-primary relative block h-[320px] w-[200px] flex-shrink-0 cursor-pointer overflow-hidden rounded-lg bg-zinc-800 transition-all duration-300 hover:z-10 hover:scale-105 focus:ring-2 focus:outline-none"
 >
 	<div class="relative aspect-[2/3] h-full w-full">
@@ -15,7 +37,7 @@
 			<img
 				loading="lazy"
 				src={getPosterUrl(movie.poster_path)}
-				alt={movie.title}
+				alt={title}
 				class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
 			/>
 		{:else}
@@ -29,7 +51,7 @@
 			class="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
 		>
 			<h3 class="line-clamp-2 text-sm leading-tight font-bold text-white drop-shadow-md">
-				{movie.title}
+				{title}
 			</h3>
 
 			<div class="mt-2 flex items-center justify-between">

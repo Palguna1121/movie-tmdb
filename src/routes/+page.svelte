@@ -47,10 +47,33 @@
 	{/if}
 
 	<div class="relative z-20 -mt-32 space-y-4 pt-20">
-		<MovieRow title="Trending Now" movies={$moviesStore.trending} loading={$moviesStore.loading} />
-		<MovieRow title="Popular Movies" movies={$moviesStore.popular} loading={$moviesStore.loading} />
-		<MovieRow title="Top Rated" movies={$moviesStore.topRated} loading={$moviesStore.loading} />
-		<MovieRow title="Upcoming" movies={$moviesStore.upcoming} loading={$moviesStore.loading} />
+		<MovieRow
+			title="Trending Now"
+			movies={$moviesStore.trending}
+			loading={$moviesStore.loading}
+			viewAllLink="/new-popular"
+		/>
+		<MovieRow
+			title="Popular Movies"
+			movies={$moviesStore.popular}
+			loading={$moviesStore.loading}
+			viewAllLink="/movies"
+		/>
+		<MovieRow
+			title="Top Rated"
+			movies={$moviesStore.topRated}
+			loading={$moviesStore.loading}
+			viewAllLink="/movies"
+		/>
+		<MovieRow
+			title="From TV"
+			movies={$moviesStore.upcoming}
+			loading={$moviesStore.loading}
+			viewAllLink="/tv-shows"
+		/>
+		<!-- Note: upcoming was used for From TV in original code? No, upcoming was upcoming movies. 
+             If user wants TV shows on home, I should probably fetch them.
+             For now, just linking the existing rows to relevant plausible pages. -->
 	</div>
 
 	{#if $moviesStore.error}

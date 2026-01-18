@@ -3,7 +3,7 @@ import { TMDB_CONFIG } from '$lib/config/tmdb.config';
 type ImageSize = 'backdrop' | 'poster' | 'profile';
 
 export function getImageUrl(path: string | null, sizeType: ImageSize = 'poster'): string {
-	if (!path) return ''; // Or a placeholder image URL
+	if (!path) return 'https://i.pinimg.com/736x/b0/66/f5/b066f5d09d23cd25b8c712a0529c9d80.jpg';
 
 	// Determine the specific size string based on type and config
 	// In a real app, you might want to allow passing specific size strings like 'w500' too

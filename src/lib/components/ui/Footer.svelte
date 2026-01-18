@@ -14,13 +14,13 @@
 					<h3 class="mb-4 font-bold">Browse</h3>
 					<ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
 						<li>
-							<a href="/" class="hover:text-primary hover:underline">New Releases</a>
+							<a href="/new-popular" class="hover:text-primary hover:underline">New Releases</a>
 						</li>
 						<li>
-							<a href="/" class="hover:text-primary hover:underline">Trending</a>
+							<a href="/movies" class="hover:text-primary hover:underline">Movies</a>
 						</li>
 						<li>
-							<a href="/" class="hover:text-primary hover:underline">TV Shows</a>
+							<a href="/tv-shows" class="hover:text-primary hover:underline">TV Shows</a>
 						</li>
 					</ul>
 				</div>

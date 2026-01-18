@@ -40,16 +40,26 @@
 							? 'text-white'
 							: 'text-gray-300'}">Home</a
 					>
-					<a href="/" class="hover:text-primary text-sm font-medium text-gray-300 transition-colors"
-						>TV Shows</a
+					<a
+						href={PATHS.TV_SHOWS}
+						class="hover:text-primary text-sm font-medium transition-colors {$page.url.pathname ===
+						PATHS.TV_SHOWS
+							? 'text-white'
+							: 'text-gray-300'}">TV Shows</a
 					>
-					<a href="/" class="hover:text-primary text-sm font-medium text-gray-300 transition-colors"
-						>Movies</a
+					<a
+						href={PATHS.MOVIES}
+						class="hover:text-primary text-sm font-medium transition-colors {$page.url.pathname ===
+						PATHS.MOVIES
+							? 'text-white'
+							: 'text-gray-300'}">Movies</a
 					>
 					<a
 						href={PATHS.POPULAR}
-						class="hover:text-primary text-sm font-medium text-gray-300 transition-colors"
-						>New & Popular</a
+						class="hover:text-primary text-sm font-medium transition-colors {$page.url.pathname ===
+						PATHS.POPULAR
+							? 'text-white'
+							: 'text-gray-300'}">New & Popular</a
 					>
 				</div>
 			</div>

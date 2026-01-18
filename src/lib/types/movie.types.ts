@@ -11,7 +11,24 @@ export interface Movie {
 	adult?: boolean;
 	popularity?: number;
 	vote_count?: number;
+	media_type?: 'movie';
 }
+
+export interface TVShow {
+	id: number;
+	name: string;
+	overview: string;
+	poster_path: string;
+	backdrop_path: string;
+	vote_average: number;
+	first_air_date: string;
+	genre_ids?: number[];
+	popularity?: number;
+	vote_count?: number;
+	media_type?: 'tv';
+}
+
+export type MediaItem = Movie | TVShow;
 
 export interface MovieDetail extends Movie {
 	genres: Genre[];
@@ -22,6 +39,7 @@ export interface MovieDetail extends Movie {
 	revenue: number;
 	homepage: string;
 	imdb_id: string;
+	original_language: string;
 }
 
 export interface Genre {
@@ -45,9 +63,12 @@ export interface Video {
 	type: string;
 }
 
-export interface MoviesResponse {
+export interface ApiResponse<T> {
 	page: number;
-	results: Movie[];
+	results: T[];
 	total_pages: number;
 	total_results: number;
 }
+
+export type MoviesResponse = ApiResponse<Movie>;
+export type TVShowsResponse = ApiResponse<TVShow>;

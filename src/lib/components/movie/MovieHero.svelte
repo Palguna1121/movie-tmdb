@@ -12,9 +12,9 @@
 
 	$: currentMovie = movies[currentIndex];
 
-	onMount(() => {
+	$: if (movies.length > 0) {
 		startInterval();
-	});
+	}
 
 	onDestroy(() => {
 		stopInterval();

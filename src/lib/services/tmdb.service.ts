@@ -1,7 +1,14 @@
 import { ApiService } from './api.service';
 import { TMDB_CONFIG } from '$lib/config/tmdb.config';
 import { TMDB_ENDPOINTS } from '$lib/utils/constants';
-import type { MoviesResponse, MovieDetail, Cast, Video, Genre } from '$lib/types/movie.types';
+import type {
+	MoviesResponse,
+	TVShowsResponse,
+	MovieDetail,
+	Cast,
+	Video,
+	Genre
+} from '$lib/types/movie.types';
 
 class TMDBService extends ApiService {
 	constructor() {
@@ -28,6 +35,22 @@ class TMDBService extends ApiService {
 		return this.get<MoviesResponse>(TMDB_ENDPOINTS.SEARCH, { query, page });
 	}
 
+	async searchTV(query: string, page: number = 1): Promise<TVShowsResponse> {
+		return this.get<TVShowsResponse>(TMDB_ENDPOINTS.SEARCH_TV, { query, page });
+	}
+
+	async getPopularTV(page: number = 1): Promise<TVShowsResponse> {
+		return this.get<TVShowsResponse>(TMDB_ENDPOINTS.POPULAR_TV, { page });
+	}
+
+	async getTopRatedTV(page: number = 1): Promise<TVShowsResponse> {
+		return this.get<TVShowsResponse>(TMDB_ENDPOINTS.TOP_RATED_TV, { page });
+	}
+
+	async getOnTheAirTV(page: number = 1): Promise<TVShowsResponse> {
+		return this.get<TVShowsResponse>(TMDB_ENDPOINTS.ON_THE_AIR_TV, { page });
+	}
+
 	async getMovieDetails(movieId: number): Promise<MovieDetail> {
 		return this.get<MovieDetail>(TMDB_ENDPOINTS.MOVIE_DETAILS(movieId));
 	}
@@ -38,6 +61,14 @@ class TMDBService extends ApiService {
 
 	async getMovieVideos(movieId: number): Promise<{ results: Video[] }> {
 		return this.get<{ results: Video[] }>(TMDB_ENDPOINTS.MOVIE_VIDEOS(movieId));
+	}
+
+	async getSimilarMovies(movieId: number): Promise<MoviesResponse> {
+		return this.get<MoviesResponse>(TMDB_ENDPOINTS.MOVIE_SIMILAR(movieId));
+	}
+
+	async getSimilarTV(tvId: number): Promise<TVShowsResponse> {
+		return this.get<TVShowsResponse>(TMDB_ENDPOINTS.TV_SIMILAR(tvId));
 	}
 
 	async getGenres(): Promise<{ genres: Genre[] }> {

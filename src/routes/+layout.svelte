@@ -4,14 +4,9 @@
 	import Footer from '$lib/components/ui/Footer.svelte';
 	import Modal from '$lib/components/ui/Modal.svelte';
 	import GlobalLoader from '$lib/components/ui/GlobalLoader.svelte';
-	import { themeStore } from '$lib/stores/theme.store';
 	import { loadingStore } from '$lib/stores/loading.store';
 	import { navigating } from '$app/stores';
 	import { onMount } from 'svelte';
-
-	onMount(() => {
-		themeStore.init();
-	});
 </script>
 
 <GlobalLoader visible={!!$navigating || $loadingStore} />
