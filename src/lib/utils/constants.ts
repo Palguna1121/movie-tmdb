@@ -7,6 +7,7 @@ export const PATHS = {
 	POPULAR: '/new-popular', // Updated to match the new route
 	MY_LIST: '/my-list',
 	SEARCH: '/search',
+	PROFILE: '/profile',
 	MOVIE_DETAIL: (id: number) => `/movie/${id}`
 };
 

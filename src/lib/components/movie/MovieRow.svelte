@@ -7,6 +7,7 @@
 	export let movies: MediaItem[] = [];
 	export let loading: boolean = false;
 	export let viewAllLink: string = ''; // Optional link for "Explore All"
+	export let type: 'movie' | 'tv' | undefined = undefined; // Force type
 </script>
 
 <div class="space-y-3">
@@ -46,7 +47,7 @@
 			{:else}
 				{#each movies as movie}
 					<div class="min-w-[200px] snap-start">
-						<MovieCard {movie} />
+						<MovieCard {movie} {type} />
 					</div>
 				{/each}
 			{/if}

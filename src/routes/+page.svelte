@@ -12,17 +12,19 @@
 		moviesStore.setLoading(true);
 		loadingStore.show();
 		try {
-			const [trending, popular, topRated, upcoming] = await Promise.all([
+			const [trending, popular, topRated, tvShows] = await Promise.all([
 				tmdbService.getTrendingMovies(),
 				tmdbService.getPopularMovies(),
 				tmdbService.getTopRatedMovies(),
-				tmdbService.getUpcomingMovies()
+				tmdbService.getPopularTV()
 			]);
 
 			moviesStore.setTrending(trending.results);
 			moviesStore.setPopular(popular.results);
 			moviesStore.setTopRated(topRated.results);
-			moviesStore.setUpcoming(upcoming.results);
+			// We are overloading 'upcoming' to be TV shows for the homepage as requested by UI structure "From TV"
+			// Ideally we should update store types, but for quick fix we cast or use existing
+			moviesStore.setUpcoming(tvShows.results as any);
 		} catch (error) {
 			console.error('Failed to fetch movies:', error);
 			moviesStore.setError('Failed to load movies. Please check your connection.');
@@ -64,12 +66,14 @@
 			movies={$moviesStore.topRated}
 			loading={$moviesStore.loading}
 			viewAllLink="/movies"
+			type="movie"
 		/>
 		<MovieRow
-			title="From TV"
+			title="Popular TV Shows"
 			movies={$moviesStore.upcoming}
 			loading={$moviesStore.loading}
 			viewAllLink="/tv-shows"
+			type="tv"
 		/>
 		<!-- Note: upcoming was used for From TV in original code? No, upcoming was upcoming movies. 
              If user wants TV shows on home, I should probably fetch them.

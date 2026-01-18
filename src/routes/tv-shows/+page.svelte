@@ -53,7 +53,7 @@
 		>
 			{#each items as item (item.id)}
 				<div class="w-full">
-					<MovieCard movie={item} />
+					<MovieCard movie={item} type="tv" />
 				</div>
 			{/each}
 			{#if loading && page > 1}

@@ -4,13 +4,15 @@
 	import { PATHS, TMDB_ENDPOINTS } from '$lib/utils/constants';
 
 	export let movie: MediaItem;
+	// EXPERIMENTAL: Accept type to force routing
+	export let type: 'movie' | 'tv' | undefined = undefined;
 
 	// Helper to get properties safely
 	$: title = (movie as Movie).title || (movie as TVShow).name;
-	$: date = (movie as Movie).release_date || (movie as TVShow).first_air_date;
-	$: link = (movie as Movie).title
-		? PATHS.MOVIE_DETAIL(movie.id)
-		: TMDB_ENDPOINTS.TV_DETAILS(movie.id); // This needs fixing. Current PATHS only has MOVIE_DETAIL.
+	// Determine type from prop OR infer from properties
+	$: mediaType = type || ((movie as Movie).title ? 'movie' : 'tv');
+
+	$: link = mediaType === 'movie' ? PATHS.MOVIE_DETAIL(movie.id) : `/tv/${movie.id}`; // Explicitly construct TV route as we just created it
 	// Wait, I haven't added TV_DETAIL to PATHS yet. I added it to TMDB_ENDPOINTS.
 	// I need to add TV_DETAIL to PATHS in constants.ts or just handle it here.
 	// Let's assume I'll add it or use a generic route if I had one.

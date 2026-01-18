@@ -87,13 +87,13 @@
 				</a>
 
 				<div class="group relative">
-					<button class="flex items-center gap-2" aria-label="User Profile">
+					<a href={PATHS.PROFILE} class="flex items-center gap-2" aria-label="User Profile">
 						<div class="h-8 w-8 overflow-hidden rounded-md border border-gray-500 bg-gray-600">
 							<span class="flex h-full w-full items-center justify-center text-xs text-white"
-								>Nana</span
+								>N</span
 							>
 						</div>
-					</button>
+					</a>
 				</div>
 			</div>
 		</div>

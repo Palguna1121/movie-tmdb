@@ -29,7 +29,7 @@
 <div class="mx-auto min-h-screen max-w-7xl px-4 pt-24 sm:px-6 lg:px-8">
 	<div class="mb-12 text-center">
 		<h1 class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">Find Movies</h1>
-		<SearchBar on:search={handleSearch} />
+		<SearchBar on:search={handleSearch} autoFocus={true} />
 	</div>
 
 	{#if $searchStore.loading}

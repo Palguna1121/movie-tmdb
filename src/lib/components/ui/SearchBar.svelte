@@ -1,11 +1,14 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import { searchStore } from '$lib/stores/search.store';
 	import { debounce } from '$lib/utils/helpers';
+
+	export let autoFocus = false;
 
 	const dispatch = createEventDispatcher();
 
 	let value = $searchStore.query;
+	let inputElement: HTMLInputElement;
 
 	const debouncedSearch = debounce((query: string) => {
 		dispatch('search', query);
@@ -16,6 +19,12 @@
 		value = target.value;
 		debouncedSearch(value);
 	}
+
+	onMount(() => {
+		if (autoFocus && inputElement) {
+			inputElement.focus();
+		}
+	});
 </script>
 
 <div class="relative mx-auto w-full max-w-xl">
@@ -31,6 +40,7 @@
 	</div>
 	<input
 		type="text"
+		bind:this={inputElement}
 		class="focus:border-primary focus:ring-primary block w-full rounded-lg border border-gray-700 bg-black/50 py-3 pr-3 pl-10 leading-5 text-white placeholder-gray-400 transition-all duration-300 focus:bg-gray-900 focus:ring-1 focus:outline-none sm:text-sm"
 		placeholder="Search for movies..."
 		{value}

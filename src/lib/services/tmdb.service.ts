@@ -67,6 +67,18 @@ class TMDBService extends ApiService {
 		return this.get<MoviesResponse>(TMDB_ENDPOINTS.MOVIE_SIMILAR(movieId));
 	}
 
+	async getTVDetails(tvId: number): Promise<any> {
+		return this.get<any>(TMDB_ENDPOINTS.TV_DETAILS(tvId));
+	}
+
+	async getTVCredits(tvId: number): Promise<{ cast: Cast[] }> {
+		return this.get<{ cast: Cast[] }>(TMDB_ENDPOINTS.TV_CREDITS(tvId));
+	}
+
+	async getTVVideos(tvId: number): Promise<{ results: Video[] }> {
+		return this.get<{ results: Video[] }>(TMDB_ENDPOINTS.TV_VIDEOS(tvId));
+	}
+
 	async getSimilarTV(tvId: number): Promise<TVShowsResponse> {
 		return this.get<TVShowsResponse>(TMDB_ENDPOINTS.TV_SIMILAR(tvId));
 	}
