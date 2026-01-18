@@ -3,6 +3,9 @@ node_modules
 # Output
 .output
 .vercel
+.vercel.json
+.qodo
+.vscode
 .netlify
 .wrangler
 /.svelte-kit
